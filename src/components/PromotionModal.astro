@@ -1,0 +1,52 @@
+<!-- PAWN PROMOTION FLOATING MODAL (Appears only when promoting a pawn) -->
+<div
+    id="promotion-modal"
+    class="fixed inset-0 z-30 hidden items-center justify-center bg-black/60 backdrop-blur-sm"
+>
+    <div class="bg-[#14161F]/[0.76] backdrop-blur-[18px] p-6 rounded-3xl border border-amber-500/40 max-w-sm w-full mx-4 text-center shadow-[0_12px_40px_-10px_rgba(0,0,0,0.7),0_0_1px_1px_rgba(255,255,255,0.04)_inset]">
+        <h2 class="font-display tracking-[0.08em] text-lg font-bold text-amber-300 mb-1">
+            ASCENSION OF STONE
+        </h2>
+        <p class="text-xs text-slate-300 mb-5">
+            Choose the sculpted form for your promoted pawn
+        </p>
+        <div class="grid grid-cols-2 gap-3">
+            <button
+                data-promo="q"
+                class="promo-choice active relative flex flex-col items-center justify-center gap-1 px-[0.9rem] !py-3 !rounded-2xl text-[0.8125rem] font-semibold text-slate-300 bg-white/[0.03] border border-transparent transition-all duration-[220ms] ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/[0.09] hover:text-white hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] [&.active]:bg-amber-500/[0.16] [&.active]:text-amber-200 [&.active]:border-amber-500/[0.42] [&.active]:shadow-[0_0_18px_rgba(245,158,11,0.2)]"
+            >
+                <span class="material-symbols-outlined !text-2xl !leading-none text-amber-400">
+                    crown
+                </span>
+                <span>Queen</span>
+            </button>
+            <button
+                data-promo="r"
+                class="promo-choice relative flex flex-col items-center justify-center gap-1 px-[0.9rem] !py-3 !rounded-2xl text-[0.8125rem] font-semibold text-slate-300 bg-white/[0.03] border border-transparent transition-all duration-[220ms] ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/[0.09] hover:text-white hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] [&.active]:bg-amber-500/[0.16] [&.active]:text-amber-200 [&.active]:border-amber-500/[0.42] [&.active]:shadow-[0_0_18px_rgba(245,158,11,0.2)]"
+            >
+                <span class="material-symbols-outlined !text-2xl !leading-none text-amber-300">
+                    fort
+                </span>
+                <span>Rook</span>
+            </button>
+            <button
+                data-promo="b"
+                class="promo-choice relative flex flex-col items-center justify-center gap-1 px-[0.9rem] !py-3 !rounded-2xl text-[0.8125rem] font-semibold text-slate-300 bg-white/[0.03] border border-transparent transition-all duration-[220ms] ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/[0.09] hover:text-white hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] [&.active]:bg-amber-500/[0.16] [&.active]:text-amber-200 [&.active]:border-amber-500/[0.42] [&.active]:shadow-[0_0_18px_rgba(245,158,11,0.2)]"
+            >
+                <span class="material-symbols-outlined !text-2xl !leading-none text-purple-300">
+                    flare
+                </span>
+                <span>Bishop</span>
+            </button>
+            <button
+                data-promo="n"
+                class="promo-choice relative flex flex-col items-center justify-center gap-1 px-[0.9rem] !py-3 !rounded-2xl text-[0.8125rem] font-semibold text-slate-300 bg-white/[0.03] border border-transparent transition-all duration-[220ms] ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/[0.09] hover:text-white hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] [&.active]:bg-amber-500/[0.16] [&.active]:text-amber-200 [&.active]:border-amber-500/[0.42] [&.active]:shadow-[0_0_18px_rgba(245,158,11,0.2)]"
+            >
+                <span class="material-symbols-outlined !text-2xl !leading-none text-emerald-300">
+                    bedroom_baby
+                </span>
+                <span>Knight</span>
+            </button>
+        </div>
+    </div>
+</div>

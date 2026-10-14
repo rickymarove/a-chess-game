@@ -1,0 +1,80 @@
+---
+interface Props {
+    title?: string;
+}
+
+const { title = "Wizard's Chess 3D — Sanctuary of Stone & Shadow" } =
+    Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark m-0 p-0 w-full h-full overflow-hidden bg-[#0B0C10]">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>{title}</title>
+
+        <!-- Tailwind CSS CDN Fallback (Remove if using @astrojs/tailwind) -->
+        <script is:inline src="https://cdn.tailwindcss.com"></script>
+        <script is:inline>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            void: "#0B0C10",
+                            ivory: "#F8FAFC",
+                        },
+                        fontFamily: {
+                            sans: ['"Plus Jakarta Sans"', "sans-serif"],
+                            display: ['"Cinzel"', "serif"],
+                            mono: ['"JetBrains Mono"', "monospace"],
+                        },
+                        keyframes: {
+                            pulseGlow: {
+                                "0%, 100%": {
+                                    opacity: "0.75",
+                                    transform: "scale(1)",
+                                },
+                                "50%": {
+                                    opacity: "1",
+                                    transform: "scale(1.06)",
+                                },
+                            },
+                        },
+                        animation: {
+                            "pulse-glow": "pulseGlow 2.4s infinite ease-in-out",
+                        },
+                    },
+                },
+            };
+        </script>
+        <!-- Google Fonts: Cinzel, Plus Jakarta Sans, JetBrains Mono, and Material Symbols -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+            rel="stylesheet"
+        />
+
+        <!-- Three.js r128 & Chess.js 0.10.3 -->
+        <script
+            is:inline
+            src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+        ></script>
+        <script
+            is:inline
+            src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"
+        ></script>
+    </head>
+    <body class="relative m-0 p-0 w-full h-full overflow-hidden bg-void font-sans text-ivory select-none">
+        <slot />
+    </body>
+</html>

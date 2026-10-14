@@ -1,16 +1,26 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import ChessCanvas from "../components/ChessCanvas.astro";
+import TopBar from "../components/TopBar.astro";
+import ActionToast from "../components/ActionToast.astro";
+import CameraDock from "../components/CameraDock.astro";
+import PromotionModal from "../components/PromotionModal.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Wizard's Chess 3D — Sanctuary of Stone & Shadow">
+    <ChessCanvas />
+    <TopBar />
+    <ActionToast />
+    <CameraDock />
+    <PromotionModal />
+
+    <script>
+        import { initWizardChess } from "../scripts/wizardChess.js";
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initWizardChess);
+        } else {
+            initWizardChess();
+        }
+    </script>
+</Layout>
