@@ -1,116 +1,106 @@
-<!-- TOP NAVIGATION BAR (Single-Level Material Design 3 App Bar) -->
-<header class="fixed top-3 left-3 right-3 md:left-6 md:right-6 z-20 flex items-center justify-between px-3 md:px-5 h-16 rounded-2xl bg-[#14161F]/76 backdrop-blur-[18px] border border-white/9 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.7),0_0_1px_1px_rgba(255,255,255,0.04)_inset]">
-    <!-- Left: Brand Identity & Game Mode Toggle -->
-    <div class="flex items-center gap-2.5 md:gap-4">
-        <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400 shadow-inner">
-                <span class="material-symbols-outlined text-[19px]! leading-none!">
-                    castle
-                </span>
-            </div>
-            <div class="hidden sm:block">
-                <h1 class="font-display tracking-[0.08em] text-sm md:text-base font-bold text-slate-100 leading-tight">
-                    WIZARD'S CHESS
-                </h1>
-                <p class="text-[11px] text-slate-400 tracking-wide">
-                    GOTHIC SANCTUARY
-                </p>
-            </div>
-        </div>
-
-        <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
-
-        <!-- Opponent Mode Toggle (Wizard AI vs 2P Pass & Play) -->
+<!-- TOP NAVIGATION BAR (Minimalist App Bar) -->
+<header class="fixed top-3 left-3 right-3 md:left-6 md:right-6 z-20 flex items-center justify-between px-3 md:px-4 h-14 rounded-xl bg-slate-950/70 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/30">
+    <!-- Left: Game Mode Switcher -->
+    <div class="flex items-center gap-2">
         <button
             id="btn-mode"
-            class="active relative inline-flex items-center justify-center gap-[0.45rem] px-[0.9rem] py-[0.45rem] rounded-full text-[0.8125rem] font-semibold text-slate-300 bg-white/3 border border-transparent transition-all duration-220 ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/9 hover:text-white hover:-translate-y-px active:translate-y-0 active:scale-[0.97] [&.active]:bg-amber-500/16 [&.active]:text-amber-200 [&.active]:border-amber-500/42 [&.active]:shadow-[0_0_18px_rgba(245,158,11,0.2)]"
-            title="Switch between Wizard AI and 2-Player Local"
+            class="active relative inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-white/5 border border-white/10 transition-colors duration-150 cursor-pointer whitespace-nowrap hover:bg-white/10 hover:text-white active:scale-[0.98] [&.active]:bg-white/15 [&.active]:text-white [&.active]:border-white/20"
+            title="Switch between AI and 2-Player Local"
         >
             <span
-                class="material-symbols-outlined text-[19px]! leading-none!"
+                class="material-symbols-outlined text-[17px]! leading-none!"
                 id="mode-icon"
             >
-                auto_awesome
+                smart_toy
             </span>
-            <span id="mode-label">vs Wizard AI</span>
+            <span id="mode-label">vs AI</span>
         </button>
     </div>
 
-    <!-- Center: Active Turn & Captured Advantage Pill -->
-    <div class="flex items-center gap-2 md:gap-3">
-        <!-- White / Marble Captured Count -->
-        <div
-            class="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs"
-            title="Obsidian pieces shattered by Marble"
-        >
-            <span class="w-2 h-2 rounded-full bg-amber-200 inline-block"></span>
-            <span class="text-slate-300 font-medium">Marble</span>
-            <span
-                id="white-captures"
-                class="font-mono tabular-nums text-amber-400 font-semibold ml-1"
-            >
-                0
-            </span>
-        </div>
-
-        <!-- Active Turn Pill -->
+    <!-- Center: Turn Status & Captures (True Centered) -->
+    <div class="absolute left-1/2 -translate-x-1/2 flex items-center pointer-events-auto">
         <div
             id="turn-pill"
-            class="flex items-center gap-2.5 px-3.5 md:px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 shadow-lg transition-all duration-300"
+            class="flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 transition-colors duration-200 shadow-sm"
         >
-            <span
-                id="turn-dot"
-                class="w-2.5 h-2.5 rounded-full bg-amber-300 shadow-[0_0_10px_#F59E0B] animate-pulse-glow"
-            ></span>
-            <span
-                id="turn-text"
-                class="text-xs md:text-sm font-semibold tracking-wide text-amber-100"
+            <!-- White Captures -->
+            <div
+                class="flex items-center gap-1.5 text-xs text-slate-400"
+                title="White captures"
             >
-                Marble's Turn
-            </span>
-            <span
-                id="move-counter"
-                class="hidden sm:inline-block font-mono tabular-nums text-[11px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400"
-            >
-                Move 1
-            </span>
-        </div>
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-200 inline-block"></span>
+                <span class="font-medium text-slate-400 text-[11px]">W</span>
+                <span
+                    id="white-captures"
+                    class="font-mono tabular-nums text-slate-200 font-medium text-xs"
+                >
+                    0
+                </span>
+            </div>
 
-        <!-- Black / Obsidian Captured Count -->
-        <div
-            class="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs"
-            title="Marble pieces shattered by Obsidian"
-        >
-            <span class="w-2 h-2 rounded-full bg-purple-400 inline-block"></span>
-            <span class="text-slate-300 font-medium">Obsidian</span>
-            <span
-                id="black-captures"
-                class="font-mono tabular-nums text-purple-300 font-semibold ml-1"
+            <!-- Hairline Divider -->
+            <div class="h-3 w-px bg-white/10"></div>
+
+            <!-- Active Turn & Move -->
+            <div class="flex items-center gap-1.5">
+                <span
+                    id="turn-dot"
+                    class="w-2 h-2 rounded-full bg-slate-100"
+                ></span>
+                <span
+                    id="turn-text"
+                    class="text-xs font-semibold tracking-normal text-slate-100 whitespace-nowrap"
+                >
+                    White's Turn
+                </span>
+                <span class="text-slate-600 text-xs hidden sm:inline">•</span>
+                <span
+                    id="move-counter"
+                    class="hidden sm:inline font-mono tabular-nums text-[11px] text-slate-400"
+                >
+                    Move 1
+                </span>
+            </div>
+
+            <!-- Hairline Divider -->
+            <div class="h-3 w-px bg-white/10"></div>
+
+            <!-- Black Captures -->
+            <div
+                class="flex items-center gap-1.5 text-xs text-slate-400"
+                title="Black captures"
             >
-                0
-            </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-600 border border-slate-500 inline-block"></span>
+                <span class="font-medium text-slate-400 text-[11px]">B</span>
+                <span
+                    id="black-captures"
+                    class="font-mono tabular-nums text-slate-200 font-medium text-xs"
+                >
+                    0
+                </span>
+            </div>
         </div>
     </div>
 
-    <!-- Right: Game Control Actions -->
-    <div class="flex items-center gap-1.5 md:gap-2">
+    <!-- Right: Actions -->
+    <div class="flex items-center gap-1 md:gap-1.5">
         <button
             id="btn-demo-strike"
-            class="arcane-active relative inline-flex items-center justify-center gap-[0.45rem] px-[0.9rem] py-[0.45rem] rounded-full text-[0.8125rem] font-semibold text-slate-300 bg-white/3 border border-transparent transition-all duration-220 ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/9 hover:text-white hover:-translate-y-px active:translate-y-0 active:scale-[0.97] [&.arcane-active]:bg-violet-500/20 [&.arcane-active]:text-violet-200 [&.arcane-active]:border-violet-500/45 [&.arcane-active]:shadow-[0_0_18px_rgba(139,92,246,0.25)]"
-            title="Trigger a live Wizard's Chess capture & shatter demonstration move"
+            class="relative inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 bg-white/4 border border-white/8 transition-colors duration-150 cursor-pointer whitespace-nowrap hover:bg-white/10 hover:text-slate-200 active:scale-[0.98]"
+            title="Demonstration Move"
         >
-            <span class="material-symbols-outlined text-[19px]! leading-none!">
+            <span class="material-symbols-outlined text-[17px]! leading-none!">
                 bolt
             </span>
-            <span class="hidden md:inline">Strike Move</span>
+            <span class="hidden md:inline">Demo</span>
         </button>
 
         <button
             id="btn-undo"
-            class="relative inline-flex items-center justify-center gap-[0.45rem] px-[0.9rem] py-[0.45rem] rounded-full text-[0.8125rem] font-semibold text-slate-300 bg-white/3 border border-transparent transition-all duration-220 ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/9 hover:text-white hover:-translate-y-px active:translate-y-0 active:scale-[0.97]"
-            title="Undo Last Move"
+            class="relative inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 bg-white/4 border border-white/8 transition-colors duration-150 cursor-pointer whitespace-nowrap hover:bg-white/10 hover:text-slate-200 active:scale-[0.98]"
+            title="Undo Move"
         >
-            <span class="material-symbols-outlined text-[19px]! leading-none!">
+            <span class="material-symbols-outlined text-[17px]! leading-none!">
                 undo
             </span>
             <span class="hidden lg:inline">Undo</span>
@@ -118,22 +108,22 @@
 
         <button
             id="btn-reset"
-            class="relative inline-flex items-center justify-center gap-[0.45rem] px-[0.9rem] py-[0.45rem] rounded-full text-[0.8125rem] font-semibold text-slate-300 bg-white/3 border border-transparent transition-all duration-220 ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/9 hover:text-white hover:-translate-y-px active:translate-y-0 active:scale-[0.97]"
-            title="Reset Sanctuary Board"
+            class="relative inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 bg-white/4 border border-white/8 transition-colors duration-150 cursor-pointer whitespace-nowrap hover:bg-white/10 hover:text-slate-200 active:scale-[0.98]"
+            title="New Game"
         >
-            <span class="material-symbols-outlined text-[19px]! leading-none!">
+            <span class="material-symbols-outlined text-[17px]! leading-none!">
                 restart_alt
             </span>
-            <span class="hidden lg:inline">New Game</span>
+            <span class="hidden lg:inline">New</span>
         </button>
 
         <button
             id="btn-sound"
-            class="active relative inline-flex items-center justify-center gap-[0.45rem] px-2.5! py-[0.45rem] rounded-full text-[0.8125rem] font-semibold text-slate-300 bg-white/3 border border-transparent transition-all duration-220 ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer whitespace-nowrap hover:bg-white/9 hover:text-white hover:-translate-y-px active:translate-y-0 active:scale-[0.97] [&.active]:bg-amber-500/16 [&.active]:text-amber-200 [&.active]:border-amber-500/42 [&.active]:shadow-[0_0_18px_rgba(245,158,11,0.2)]"
-            title="Toggle Cathedral Acoustic SFX"
+            class="active relative inline-flex items-center justify-center p-2 rounded-lg text-xs font-medium text-slate-400 bg-white/4 border border-white/8 transition-colors duration-150 cursor-pointer whitespace-nowrap hover:bg-white/10 hover:text-slate-200 active:scale-[0.98] [&.active]:text-slate-200 [&.active]:bg-white/8"
+            title="Toggle Sound"
         >
             <span
-                class="material-symbols-outlined text-[19px]! leading-none!"
+                class="material-symbols-outlined text-[17px]! leading-none!"
                 id="sound-icon"
             >
                 volume_up

@@ -1230,7 +1230,7 @@ export function initWizardChess() {
 
                     const pieceNames = { p: 'Pawn', r: 'Rook', n: 'Knight', b: 'Bishop', q: 'Queen', k: 'King' };
                     showToast(
-                        `${c.result.color === 'w' ? 'Marble' : 'Obsidian'} ${pieceNames[c.result.piece]} shatters ${pieceNames[c.result.captured]}!`,
+                        `${c.result.color === 'w' ? 'White' : 'Black'} ${pieceNames[c.result.piece]} captures ${pieceNames[c.result.captured]}`,
                         'bolt'
                     );
                 }
@@ -1278,10 +1278,10 @@ export function initWizardChess() {
 
             if (game.in_checkmate()) {
                 sfx.playCheckAlert(true);
-                showToast(`Checkmate! ${game.turn() === 'w' ? 'Obsidian' : 'Marble'} claims the Sanctuary!`, 'emoji_events');
+                showToast(`Checkmate! ${game.turn() === 'w' ? 'Black' : 'White'} wins!`, 'emoji_events');
             } else if (game.in_check()) {
                 sfx.playCheckAlert(false);
-                showToast(`${game.turn() === 'w' ? 'Marble' : 'Obsidian'} King is in Check!`, 'warning');
+                showToast(`${game.turn() === 'w' ? 'White' : 'Black'} is in Check!`, 'warning');
             }
 
             if (vsAI && !game.game_over() && game.turn() === 'b') {
@@ -1373,7 +1373,7 @@ export function initWizardChess() {
                 const bRank = parseInt(b.to[1], 10);
                 return game.turn() === 'w' ? (bRank - aRank) : (aRank - bRank);
             });
-            showToast('Advancing stone vanguard toward strike range...', 'bolt');
+            showToast('Playing demonstration move...', 'bolt');
             executeChoreographedMove(legalMoves[0]);
         }
     }
@@ -1502,20 +1502,21 @@ export function initWizardChess() {
         if (!turnPill || !turnDot || !turnText) return;
 
         if (game.in_checkmate()) {
-            turnText.textContent = turn === 'w' ? 'Obsidian Triumphs!' : 'Marble Triumphs!';
-            turnDot.className = 'w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_12px_#EF4444]';
-            turnPill.className = 'flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-red-950/80 border border-red-500/60 shadow-lg';
+            turnText.textContent = turn === 'w' ? 'Black Wins' : 'White Wins';
+            turnDot.className = 'w-2 h-2 rounded-full bg-red-400';
+            turnPill.className = 'flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-lg bg-red-950/60 border border-red-500/40 transition-colors duration-200 shadow-sm';
         } else if (game.in_draw() || game.in_stalemate()) {
-            turnText.textContent = 'Sanctuary Stalemate';
-            turnDot.className = 'w-2.5 h-2.5 rounded-full bg-slate-400';
+            turnText.textContent = 'Draw / Stalemate';
+            turnDot.className = 'w-2 h-2 rounded-full bg-slate-400';
+            turnPill.className = 'flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 transition-colors duration-200 shadow-sm';
         } else if (turn === 'w') {
-            turnText.textContent = game.in_check() ? 'Marble (IN CHECK)' : "Marble's Turn";
-            turnDot.className = 'w-2.5 h-2.5 rounded-full bg-amber-300 shadow-[0_0_10px_#F59E0B] animate-pulse-glow';
-            turnPill.className = 'flex items-center gap-2.5 px-3.5 md:px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/45 shadow-lg transition-all duration-300';
+            turnText.textContent = game.in_check() ? 'White (Check)' : "White's Turn";
+            turnDot.className = 'w-2 h-2 rounded-full bg-slate-100';
+            turnPill.className = 'flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 transition-colors duration-200 shadow-sm';
         } else {
-            turnText.textContent = game.in_check() ? 'Obsidian (IN CHECK)' : (vsAI ? 'Wizard Thinking...' : "Obsidian's Turn");
-            turnDot.className = 'w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_10px_#8B5CF6] animate-pulse-glow';
-            turnPill.className = 'flex items-center gap-2.5 px-3.5 md:px-4 py-1.5 rounded-full bg-slate-900/90 border border-purple-500/45 shadow-lg transition-all duration-300';
+            turnText.textContent = game.in_check() ? 'Black (Check)' : (vsAI ? 'AI Thinking...' : "Black's Turn");
+            turnDot.className = 'w-2 h-2 rounded-full bg-slate-400';
+            turnPill.className = 'flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 transition-colors duration-200 shadow-sm';
         }
     }
 
@@ -1526,17 +1527,17 @@ export function initWizardChess() {
         const icon = document.getElementById('mode-icon');
         if (vsAI) {
             btn?.classList.add('active');
-            if (label) label.textContent = 'vs Wizard AI';
-            if (icon) icon.textContent = 'auto_awesome';
-            showToast('Mode: Playing against the Cathedral Wizard AI', 'auto_awesome');
+            if (label) label.textContent = 'vs AI';
+            if (icon) icon.textContent = 'smart_toy';
+            showToast('Mode: vs AI', 'smart_toy');
             if (!game.game_over() && game.turn() === 'b' && !isAnimatingMove) {
                 setTimeout(makeWizardAIMove, 350);
             }
         } else {
             btn?.classList.remove('active');
-            if (label) label.textContent = '2P Sanctuary';
+            if (label) label.textContent = 'Pass & Play';
             if (icon) icon.textContent = 'group';
-            showToast('Mode: 2-Player Pass & Play enabled', 'group');
+            showToast('Mode: 2-Player Pass & Play', 'group');
         }
         updateUIStatus();
     });
@@ -1555,7 +1556,7 @@ export function initWizardChess() {
         legalMovesForSelected = [];
         lastMoveSquares = [];
         syncBoardFromEngine();
-        showToast('Previous command reversed in time', 'undo');
+        showToast('Move undone', 'undo');
     });
 
     document.getElementById('btn-reset')?.addEventListener('click', () => {
@@ -1568,7 +1569,7 @@ export function initWizardChess() {
         blackShatteredCount = 0;
         syncBoardFromEngine();
         setCameraPreset('white');
-        showToast('All 32 stone statues restored to the Sanctuary', 'restart_alt');
+        showToast('Game reset', 'restart_alt');
     });
 
     document.getElementById('btn-sound')?.addEventListener('click', () => {
@@ -1589,7 +1590,7 @@ export function initWizardChess() {
         camState.battleCamEnabled = !camState.battleCamEnabled;
         e.currentTarget.classList.toggle('active', camState.battleCamEnabled);
         showToast(
-            camState.battleCamEnabled ? 'Battle Cam enabled: Zooms onto captures' : 'Battle Cam disabled',
+            camState.battleCamEnabled ? 'Auto Cam on' : 'Auto Cam off',
             'videocam'
         );
     });
@@ -1682,6 +1683,6 @@ export function initWizardChess() {
 
     syncBoardFromEngine();
     setCameraPreset('white');
-    showToast('Select any carved Marble piece or click Strike Move', 'auto_fix_high');
+    showToast('Select a piece to move', 'info');
     animate();
 }
